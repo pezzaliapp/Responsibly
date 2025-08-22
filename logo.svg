@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
+  <rect width="160" height="160" rx="20" ry="20" fill="#f4f6f8"/>
+  <circle cx="80" cy="64" r="28" fill="#dfe3e8"/>
+  <path d="M80 30 a34 34 0 0 1 0 68 a34 34 0 0 1 0-68" fill="none" stroke="#111" stroke-width="4"/>
+  <path d="M32 118 h96 a0 0 0 0 1 0 0 v6 a18 18 0 0 1 -18 18 h-60 a18 18 0 0 1 -18 -18 v-6" fill="#fff" stroke="#111" stroke-width="3"/>
+  <text x="80" y="136" font-size="18" text-anchor="middle" font-family="Arial, Helvetica, sans-serif">R</text>
+</svg>

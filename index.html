@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsibly – Gioco Responsabile</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 160'%3E%3Crect width='160' height='160' rx='20' ry='20' fill='%23f4f6f8'/%3E%3Ccircle cx='80' cy='64' r='28' fill='%23dfe3e8'/%3E%3Cpath d='M80 30 a34 34 0 0 1 0 68 a34 34 0 0 1 0-68' fill='none' stroke='%23111' stroke-width='4'/%3E%3Cpath d='M32 118 h96 a0 0 0 0 1 0 0 v6 a18 18 0 0 1 -18 18 h-60 a18 18 0 0 1 -18 -18 v-6' fill='%23fff' stroke='%23111' stroke-width='3'/%3E%3Ctext x='80' y='136' font-size='18' text-anchor='middle' font-family='Arial, Helvetica, sans-serif'%3ER%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <img src="logo.svg" alt="Responsibly logo" class="logo" width="64" height="64"/>
+    <div class="brand">
+      <h1>Responsibly</h1>
+      <p class="subtitle">Gioca con la matematica, non con le illusioni.</p>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h2>Gioco responsabile, numeri chiari.</h2>
+    <p>Generatore numerico estetico, probabilità e valore atteso, controllo del budget. <br/>Nessuna promessa di vincita: solo trasparenza.</p>
+    <a class="cta" href="#tab-ev">Vai alle probabilità</a>
+  </section>
+
+  <nav class="tabs">
+    <button class="tab-btn active" data-target="#tab-picker">Random Picker</button>
+    <button class="tab-btn" data-target="#tab-ev">Probabilità &amp; Valore</button>
+    <button class="tab-btn" data-target="#tab-budget">Budget Guard</button>
+    <button class="tab-btn" data-target="#tab-edu">Formazione</button>
+  </nav>
+
+  <main>
+    <section id="tab-picker" class="tab active">
+      <h2>Generatore numeri (estetico)</h2>
+      <p class="note">Serve solo per giocare con i numeri. Non aumenta la probabilità di vincita.</p>
+      <div class="grid-2">
+        <div class="card">
+          <h3>SuperEnalotto (6 numeri 1–90)</h3>
+          <div class="controls">
+            <label><input type="checkbox" id="no-consecutivi" /> Evita consecutivi</label>
+            <label><input type="checkbox" id="no-uguali-decine" /> Distribuisci decine</label>
+          </div>
+          <button id="btn-se">Genera combinazione</button>
+          <pre id="out-se" class="out"></pre>
+        </div>
+        <div class="card">
+          <h3>Lotto (5 numeri 1–90)</h3>
+          <div class="controls">
+            <label><input type="checkbox" id="lotto-no-consecutivi" /> Evita consecutivi</label>
+          </div>
+          <button id="btn-lotto">Genera cinquina</button>
+          <pre id="out-lotto" class="out"></pre>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-ev" class="tab">
+      <h2>Probabilità &amp; Valore atteso (dimostrativo)</h2>
+      <p class="note">Ogni estrazione è indipendente. Questo strumento mostra grandezze indicative per capire gli ordini di grandezza del rischio.</p>
+      <div class="grid-2">
+        <div class="card">
+          <h3>SuperEnalotto – Jackpot</h3>
+          <label>Prezzo giocata (€): <input type="number" id="se-cost" value="1" min="0" step="0.5"></label>
+          <label>Jackpot ipotetico (€): <input type="number" id="se-prize" value="100000000" min="0" step="1000000"></label>
+          <button id="btn-se-ev">Calcola</button>
+          <div id="se-ev-out" class="out"></div>
+          <small class="muted">Nota: il sistema reale di premi è più complesso. Qui si considera solo il jackpot per mostrare l'ordine di grandezza.</small>
+        </div>
+        <div class="card">
+          <h3>Lotto – Ambo (singola combinazione)</h3>
+          <label>Prezzo puntata (€): <input type="number" id="lotto-cost" value="1" min="0" step="0.5"></label>
+          <label>Premio ipotetico (€): <input type="number" id="lotto-prize" value="235" min="0" step="1"></label>
+          <button id="btn-lotto-ev">Calcola</button>
+          <div id="lotto-ev-out" class="out"></div>
+          <small class="muted">Stima indicativa: probabilità ambo su una ruota ≈ 1/400,5 (vedi formula nel codice). I payout reali variano.</small>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-budget" class="tab">
+      <h2>Budget Guard</h2>
+      <p class="note">Imposta un tetto mensile. L'app tiene traccia locale (offline) e avvisa se lo superi.</p>
+      <div class="card">
+        <label>Budget mensile (€): <input type="number" id="budget-monthly" min="0" step="1" value="20"></label>
+        <label>Aggiungi spesa (€): <input type="number" id="spent-add" min="0" step="0.5" value="0"></label>
+        <button id="btn-add-spent">Aggiungi</button>
+        <button id="btn-reset-month">Azzera mese</button>
+        <div id="budget-out" class="out"></div>
+        <button id="btn-export-budget">📤 Esporta budget</button>
+      </div>
+    </section>
+
+    <section id="tab-edu" class="tab">
+      <h2>Formazione anti-bias</h2>
+      <ul class="edu">
+        <li><strong>Fallacia del giocatore:</strong> “non esce da un po’, quindi è in arrivo”. Falso: ogni estrazione è indipendente.</li>
+        <li><strong>Illusione di controllo:</strong> scegliere “bene” i numeri non cambia le probabilità.</li>
+        <li><strong>Valore atteso:</strong> se è negativo, nel lungo periodo si perde.</li>
+        <li><strong>Limiti personali:</strong> tempo e denaro massimi prima di iniziare.</li>
+      </ul>
+      <p class="disclaimer">Questa app è informativa. Non incoraggia il gioco d’azzardo. Se il gioco diventa un problema, chiedi aiuto a servizi competenti.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Responsibly • MIT License • <a href="PRIVACY.md">Privacy</a> • <a href="DISCLAIMER.md">Disclaimer</a> • PWA offline-ready</p>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      });
+    }
+  </script>
+  <div id="a2hs-banner" class="a2hs-banner hidden">
+    <span>📲 Aggiungi Responsibly alla schermata Home!</span>
+    <button id="btn-a2hs">Aggiungi</button>
+  </div>
+</body>
+</html>
