@@ -159,16 +159,17 @@ document.getElementById('btn-export-budget').addEventListener('click', ()=>{
   const remain = (s.monthly || 0) - spent;
   const fmt = new Intl.NumberFormat('it-IT', { maximumFractionDigits: 2 });
 
-  const lines = [
-    'RESPONSIBLY – Esportazione Budget',
-    `Mese: ${k}`,
-    `Budget mensile: € ${fmt.format(s.monthly || 0)}`,
-    `Speso: € ${fmt.format(spent)}`,
-    `Rimanente: € ${fmt.format(remain)}`,
-    '',
-    'Dettagli (JSON):',
-    JSON.stringify(s, null, 2)
-  ].join('\n');
+ const lines = [
+  'RESPONSIBLY – Esportazione Budget',
+  `Mese: ${k}`,
+  `Budget mensile: € ${fmt.format(s.monthly || 0)}`,
+  `Speso: € ${fmt.format(spent)}`,
+  `Rimanente: € ${fmt.format(remain)}`,
+  '',
+  'Dettagli (JSON):',
+  '',
+  JSON.stringify(s, null, 2)
+].join('\n');
 
   const blob = new Blob([lines], { type: 'text/plain' });
   const url = URL.createObjectURL(blob);
