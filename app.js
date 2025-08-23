@@ -151,17 +151,33 @@ document.getElementById('budget-monthly').addEventListener('change', ()=>{
 renderBudget();
 
 
-// Export budget JSON
+// Export budget TXT (human-readable)
 document.getElementById('btn-export-budget').addEventListener('click', ()=>{
-  const s=getState();
-  const blob = new Blob([JSON.stringify(s,null,2)], {type:'application/json'});
+  const s = getState();
+  const k = monthKey();
+  const spent = s.spentByMonth[k] || 0;
+  const remain = (s.monthly || 0) - spent;
+  const fmt = new Intl.NumberFormat('it-IT', { maximumFractionDigits: 2 });
+
+  const lines = [
+    'RESPONSIBLY – Esportazione Budget',
+    `Mese: ${k}`,
+    `Budget mensile: € ${fmt.format(s.monthly || 0)}`,
+    `Speso: € ${fmt.format(spent)}`,
+    `Rimanente: € ${fmt.format(remain)}`,
+    '',
+    'Dettagli (JSON):',
+    JSON.stringify(s, null, 2)
+  ].join('\n');
+
+  const blob = new Blob([lines], { type: 'text/plain' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = url; a.download = 'responsibly_budget.json';
+  a.href = url; 
+  a.download = 'responsibly_budget.txt';
   a.click();
   URL.revokeObjectURL(url);
 });
-
 
 // Add to Home Screen (A2HS)
 let deferredPrompt;
