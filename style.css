@@ -30,14 +30,43 @@ footer{padding:16px;border-top:1px solid var(--line);color:#666;text-align:cente
 .disclaimer{margin-top:16px;color:#a33}
 
 
-/* Dark mode */
+/* Dark mode – contrasto migliorato */
 @media (prefers-color-scheme: dark) {
-  body { background:#121212; color:#ddd; }
-  .site-header, .hero, .card, footer, .tabs { background:#1e1e1e; color:#ddd; border-color:#333; }
-  button, .cta { background:#2a2a2a; color:#eee; border-color:#444; }
-  button:hover, .cta:hover { background:#333; }
-  .out { background:#1b1b1b; border-color:#444; color:#ddd; }
+  body { background:#121212; color:#e6e6e6; }
+
+  /* superfici */
+  .site-header, .hero, .card, footer, .tabs {
+    background:#181818; color:#e6e6e6; border-color:#2a2a2a;
+  }
+
+  /* tab */
+  .tab-btn {
+    background:#222; border-color:#444; color:#eee;
+  }
+  .tab-btn.active {
+    background:#2c2c2c; border-color:#666; color:#fff;
+  }
+
+  /* pulsanti */
+  button, .cta {
+    background:#222; color:#eee; border:1px solid #444;
+  }
+  button:hover, .cta:hover { background:#2f2f2f; }
+
+  /* campi di input */
+  input, select, textarea {
+    background:#1a1a1a; color:#eee; border:1px solid #404040;
+  }
+  input::placeholder, textarea::placeholder { color:#8a8a8a; }
+  label { color:#ddd; }
+
+  /* testi secondari e aree output */
+  .note, .muted { color:#bdbdbd; }
+  .out { background:#121212; border-color:#2a2a2a; color:#e6e6e6; }
 }
+
+/* accessibilità: focus visibile anche in dark */
+:focus-visible { outline:2px solid #5aa9ff; outline-offset:2px; }
 
 /* A2HS banner */
 .a2hs-banner { position:fixed; bottom:0; left:0; right:0; background:#fff; border-top:1px solid #ccc; padding:10px; display:flex; justify-content:space-between; align-items:center; z-index:9999; }
